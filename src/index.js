@@ -1,35 +1,23 @@
 module.exports = function toReadable(number) {
-  if (Number.isFinite(number) && Number.isInteger(number)) {
-    number = number.toString().split('').map(Number);
-    let c = number.length;
-  } else return false;
-  let result = [];
-  let numbers = {
-    0: 'zero',
-    1: 'one',
-    2: 'two',
-    3: 'three',
-    4: 'four',
-    5: 'five',
-    6: 'six',
-    7: 'seven',
-    8: 'eight',
-    9: 'nine'
+
+  let dg = ['zero','one','two','three','four', 'five','six','seven','eight','nine',
+            'ten','eleven','twelve','thirteen', 'fourteen','fifteen','sixteen', 'seventeen','eighteen','nineteen'];
+  let tw = ['','','twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety'];
+
+ /*  if(y<2) return dg[number];
+  else if(y>=2) return tw[Number(number.toString()[0])];
+  if(number > 20 && number < 100){
+    //if(number%10 === 0) [Number(number.toString()[0])];
+     return `${tw[Number(number.toString()[0])]} ${dg[Number(number.toString()[0])]}`
+  } */
+  if(number < 20 ) return dg[number];
+  if (number%10 !==0) return `${tw[number.toString()[0]]} ${dg[number.toString()[1]]}`;
+  else if(number%10===0 && number.toString().length===2) return tw[number.toString()[0]];
+  if(number.toString().length === 3){
+    if(number.toString()[1]==='0' && number.toString()[2]==='0'){
+      return `${dg[number.toString()[0]]} hundred`;
+    } 
+    
   }
-  let preffix = ['teen','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety']
-  for (let i = 0; i < number.length; i++) {
-    if (c === 3) {
-      result.push(`${numbers[number[i]]} hundred`);
-      c--;
-    }
-    if (c === 2) {
-      result.push(`${numbers[number[i]]}`);
-      c--;
-    }
-    if (c === 1) {
-      result.push(`${numbers[number[i]]}`);
-      c--;
-    }
-  }
-  return result.join('');
+
 }
